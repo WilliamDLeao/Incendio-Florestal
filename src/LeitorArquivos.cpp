@@ -44,6 +44,7 @@ void LeitorArquivo::escreveArquivo(const vector<vector<int>>& matriz, int passos
     for (const auto& linha : matriz) {
         for (int elemento : linha) {
             outFile << elemento;
+            outFile << " ";
         }
         outFile << '\n';
     }
