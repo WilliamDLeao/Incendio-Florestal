@@ -13,8 +13,8 @@ using namespace std;
 class LeitorArquivo {
 private:
     int contadorArquivos;
-    string nomeArquivoEntrada;
-    string nomeArquivoSaida;
+    string nomeArquivoEntrada = "input.dat";
+    string nomeArquivoSaida = "output.dat";
 
 public:
     LeitorArquivo(int contador);

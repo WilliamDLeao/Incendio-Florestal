@@ -1,10 +1,6 @@
 #include <vector>
 #include "LeitorArquivos.hpp"
 
-LeitorArquivo::LeitorArquivo(int contador) : contadorArquivos(contador) {
-    nomeArquivoEntrada = "input.dat";
-    nomeArquivoSaida = "output.dat";
-}
 LeitorArquivo::LeitorArquivo(){}
 vector<vector<int>> LeitorArquivo::lerArquivo() {
     ifstream inFile(nomeArquivoEntrada.c_str());
@@ -41,22 +37,23 @@ void LeitorArquivo::escreveArquivo(const vector<vector<int>>& matriz, int passos
         exit(EXIT_FAILURE);
     }
 
-    for (const auto& linha : matriz) {
-        for (int elemento : linha) {
-            outFile << elemento;
-            outFile << " ";
+    if(EOF){
+            for (const auto& linha : matriz) {
+            for (int elemento : linha) {
+                outFile << elemento;
+                outFile << " ";
+            }
+            outFile << '\n';
         }
-        outFile << '\n';
+
+        outFile << "Passos: " << passos << endl;
     }
-
-    outFile << "Passos: " << passos << endl;
-
 }
 
 void LeitorArquivo::exibeMatriz(const vector<vector<char>>& matriz) {
     cout << "\nConteúdo armazenado na matriz:\n";
     for (const auto& linha : matriz) {
-        for (char elemento : linha) {
+        for (int elemento : linha) {
             cout << elemento;
         }
         cout << '\n';
