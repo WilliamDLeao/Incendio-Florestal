@@ -18,7 +18,7 @@ using namespace std;
 class Config {
 private:
     int iteracoes = 10;
-    int vento = 4; // 0 = sem, 1 = cima, 2 = direita, 3 = baixo, 4 = esquerda
+    int vento = 0; // 0 = sem, 1 = cima, 2 = direita, 3 = baixo, 4 = esquerda
 public:
     Config();
     int getIteracoes(); 

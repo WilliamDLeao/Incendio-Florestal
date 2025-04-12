@@ -134,3 +134,51 @@ void Fogo::alastrarFogoEsquerda(vector<vector<int>> &matriz, int linha, int colu
         
     }
 }
+
+void Fogo::delayPropagacao(vector<vector<int>> &matrizAux, int linha, int coluna ){
+    
+    for (int x = 0; x < linha; x++)
+    {
+        for (int y = 0; y < coluna; y++)
+        {
+            if (matrizAux[x][y] == 2)
+            {
+                matrizAux[x][y] = 7;
+            }
+            
+        }
+        
+    }
+}
+void Fogo::alteraEstadoArvoreComFogo(vector<vector<int>> &matriz,vector<vector<int>> &matrizAux, int linha, int coluna ){
+    
+    for (int x = 0; x < linha; x++)
+    {
+        for (int y = 0; y < coluna; y++)
+        {
+            if (matrizAux[x][y] == 7)
+            {
+                matriz[x][y] = 3;
+            }
+            
+        }
+        
+    }
+}
+
+void Fogo::transfereFogoMatrizAuxiliar(vector<vector<int>> &matriz,vector<vector<int>> &matrizAux, int linha, int coluna ){
+    
+    for (int x = 0; x < linha; x++)
+    {
+        for (int y = 0; y < coluna; y++)
+        {
+            if (matriz[x][y] == 2 && matrizAux[x][y] != 7)
+            {
+                matrizAux[x][y] = 2;
+            }
+            
+        }
+        
+    }
+}
+    

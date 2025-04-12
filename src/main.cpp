@@ -14,13 +14,17 @@ int main(){
 
     int cont=1;
     leitorArquivo.limpaArquivo();
+    vector<vector<int>> matrizAux = matriz; 
+
     while (cont<=config.getIteracoes())
     {
         int passos = 2;
+        fogo.transfereFogoMatrizAuxiliar(matriz, matrizAux, linha, coluna);
+        fogo.alteraEstadoArvoreComFogo(matriz, matrizAux, linha, coluna);
         switch (config.getVento())
         {
             case 0:
-                fogo.alastrarFogoSemVento(matriz, linha, coluna);
+                fogo.alastrarFogoSemVento(matriz, linha, coluna); 
             break;
 
             case 1:
@@ -40,7 +44,7 @@ int main(){
             break;
             
         }
-
+        fogo.delayPropagacao(matrizAux, linha, coluna);
         leitorArquivo.escreveArquivo(matriz, passos, cont);
         cont++;
     }

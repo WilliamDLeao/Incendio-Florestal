@@ -18,8 +18,9 @@ public:
     void alastrarFogoDireita(vector<vector<int>> &matriz, int x, int y);
     void alastrarFogoBaixo(vector<vector<int>> &matriz, int x, int y);
     void alastrarFogoEsquerda(vector<vector<int>> &matriz, int x, int y);
-    void alteraEstadoArvoreComFogo();
-
+    void delayPropagacao(vector<vector<int>> &matrizAux, int linha, int coluna );
+    void alteraEstadoArvoreComFogo(vector<vector<int>> &matriz,vector<vector<int>> &matrizAux, int linha, int coluna );
+    void transfereFogoMatrizAuxiliar(vector<vector<int>> &matriz,vector<vector<int>> &matrizAux, int linha, int coluna );
 };
 
 #endif
