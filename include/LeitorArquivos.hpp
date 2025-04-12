@@ -21,7 +21,8 @@ public:
     LeitorArquivo();
     vector<vector<int>> lerArquivo();
 
-    void escreveArquivo(const vector<vector<int>>& matriz, int passos);
+    void limpaArquivo();
+    void escreveArquivo(const vector<vector<int>>& matriz, int passos, int iteracao);
     void exibeMatriz(const vector<vector<char>>& matriz);
  
     int leX();

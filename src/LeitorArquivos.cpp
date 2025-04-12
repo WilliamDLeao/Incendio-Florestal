@@ -29,7 +29,7 @@ vector<vector<int>> LeitorArquivo::lerArquivo() {
     }
     return matriz;
 }
-
+/*
 void LeitorArquivo::escreveArquivo(const vector<vector<int>>& matriz, int passos) {
     ofstream outFile(nomeArquivoSaida.c_str());
     if (!outFile) {
@@ -48,6 +48,32 @@ void LeitorArquivo::escreveArquivo(const vector<vector<int>>& matriz, int passos
 
         outFile << "Passos: " << passos << endl;
     }
+}
+    */
+void LeitorArquivo::limpaArquivo() {
+    ofstream outFile(nomeArquivoSaida.c_str(), ios::trunc); // modo trunc apaga o conteúdo
+    if (!outFile) {
+        cerr << "Não foi possível abrir o arquivo para limpeza: " << nomeArquivoSaida << "\n";
+        exit(EXIT_FAILURE);
+    }
+}
+void LeitorArquivo::escreveArquivo(const vector<vector<int>>& matriz, int passos, int iteracao) {
+    ofstream outFile(nomeArquivoSaida.c_str(), ios::app); // modo append
+    if (!outFile) {
+        cerr << "Não foi possível abrir o arquivo de saída: " << nomeArquivoSaida << "\n";
+        exit(EXIT_FAILURE);
+    }
+
+    outFile << "Iteração número " << iteracao << ":\n";
+
+    for (const auto& linha : matriz) {
+        for (int elemento : linha) {
+            outFile << elemento << " ";
+        }
+        outFile << '\n';
+    }
+
+    outFile << "Passos: " << passos << "\n\n";
 }
 
 void LeitorArquivo::exibeMatriz(const vector<vector<char>>& matriz) {

@@ -12,15 +12,36 @@ int main(){
     int linha = leitorArquivo.leX();
     int coluna = leitorArquivo.leY();
 
-    int cont=0;
+    int cont=1;
+    leitorArquivo.limpaArquivo();
     while (cont<=config.getIteracoes())
     {
         int passos = 2;
-        leitorArquivo.escreveArquivo(matriz, passos);
-        //if alastra fogo tal faz isso aql
-        fogo.alastrarFogoSemVento(matriz, linha, coluna);
+        switch (config.getVento())
+        {
+            case 0:
+                fogo.alastrarFogoSemVento(matriz, linha, coluna);
+            break;
 
+            case 1:
+                fogo.alastrarFogoCima(matriz, linha, coluna);
+            break;
         
+            case 2:
+                fogo.alastrarFogoDireita(matriz, linha, coluna);
+            break;
+
+            case 3:
+                fogo.alastrarFogoBaixo(matriz, linha, coluna);
+            break;
+
+            case 4:
+                fogo.alastrarFogoEsquerda(matriz, linha, coluna);
+            break;
+            
+        }
+
+        leitorArquivo.escreveArquivo(matriz, passos, cont);
         cont++;
     }
     
