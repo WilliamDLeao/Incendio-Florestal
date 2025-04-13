@@ -14,6 +14,7 @@ using namespace std;
 -arvore em chamas (2) tem que virar cinza
 -arvore queimada(3) nao queima
 -agua (4)
+-animal (5)
 */
 class Config {
 private:
