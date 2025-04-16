@@ -2,79 +2,79 @@ Iteração número 1:
 1 2 1 1 4 
 2 2 2 1 1 
 1 2 1 1 4 
-0 1 1 1 1 
-2 2 1 0 4 
-Passos: 2
+0 0 1 1 1 
+1 4 1 0 4 
+Passos: 1
 
 Iteração número 2:
 2 2 2 1 4 
 2 3 2 2 1 
 2 2 2 1 4 
-0 2 1 1 1 
-3 2 2 0 4 
+0 0 1 1 1 
+1 4 1 0 4 
 Passos: 2
 
 Iteração número 3:
 2 3 2 2 4 
 3 3 3 2 2 
 2 3 2 2 4 
-0 2 2 1 1 
-3 3 2 0 4 
-Passos: 2
+0 1 2 1 1 
+1 0 1 0 4 
+Passos: 3
 
 Iteração número 4:
 3 3 3 2 4 
 3 3 3 3 2 
 3 3 3 2 4 
-0 3 2 2 1 
-3 3 3 0 4 
-Passos: 2
+0 2 2 2 1 
+1 0 2 0 4 
+Passos: 3
 
 Iteração número 5:
 3 3 3 3 4 
 3 3 3 3 3 
 3 3 3 3 4 
-0 3 3 2 2 
-3 3 3 0 4 
-Passos: 2
+0 2 3 2 2 
+1 0 2 0 4 
+Passos: 3
 
 Iteração número 6:
 3 3 3 3 4 
 3 3 3 3 3 
 3 3 3 3 4 
 0 3 3 3 2 
-3 3 3 0 4 
-Passos: 2
+1 0 3 0 4 
+Passos: 3
 
 Iteração número 7:
 3 3 3 3 4 
 3 3 3 3 3 
 3 3 3 3 4 
 0 3 3 3 3 
-3 3 3 0 4 
-Passos: 2
+1 0 3 0 4 
+Passos: 4
 
 Iteração número 8:
 3 3 3 3 4 
 3 3 3 3 3 
 3 3 3 3 4 
 0 3 3 3 3 
-3 3 3 0 4 
-Passos: 2
+1 0 3 0 4 
+Passos: 5
 
 Iteração número 9:
 3 3 3 3 4 
 3 3 3 3 3 
 3 3 3 3 4 
 0 3 3 3 3 
-3 3 3 0 4 
-Passos: 2
+1 0 3 0 4 
+Passos: 6
 
 Iteração número 10:
 3 3 3 3 4 
 3 3 3 3 3 
 3 3 3 3 4 
 0 3 3 3 3 
-3 3 3 0 4 
-Passos: 2
+1 0 3 0 4 
+Passos: 7
 
