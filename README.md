@@ -68,13 +68,13 @@ g++ -std=c++11 main.cpp Animal.cpp Fogo.cpp LeitorArquivos.cpp Config.cpp -o sim
 ## **📂 Estrutura do Código**  
 ```plaintext
 .
-├── main.cpp            # Loop principal da simulação
-├── Animal.hpp/cpp      # Lógica do animal
-├── Fogo.hpp/cpp        # Propagação do incêndio
-├── LeitorArquivos.hpp/cpp # Leitura/escrita de arquivos
-├── Config.hpp/cpp      # Parâmetros (ventos, iterações)
-├── entrada.txt         # Exemplo de configuração
-└── saida.txt           # Saída gerada
+├── main.cpp                  # Loop principal da simulação
+├── Animal.hpp/cpp            # Lógica do animal
+├── Fogo.hpp/cpp              # Propagação do incêndio
+├── LeitorArquivos.hpp/cpp    # Leitura/escrita de arquivos
+├── Config.hpp/cpp            # Parâmetros (ventos, iterações)
+├── entrada.txt               # Exemplo de configuração
+└── saida.txt                 # Saída gerada
 ```
 
 ---
