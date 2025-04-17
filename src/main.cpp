@@ -68,8 +68,13 @@ int main(){
             
         }
         fogo.delayPropagacao(matrizAuxFogo, linha, coluna);
-        leitorArquivo.escreveArquivo(matrizRastro, animal2.getContaPassos(), cont);
-
+        animal2.estaCercado(matrizRastro);
+        leitorArquivo.escreveArquivo(matrizRastro, animal2.getContaPassos(), cont, animal2.getContaAgua(), animal2.getCercado());
+        if (animal2.getCercado() == true)
+        {
+            return 0;
+        }
+        
         cont++;
     }
     

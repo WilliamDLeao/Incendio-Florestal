@@ -15,7 +15,6 @@ Animal::Animal(const vector<vector<int>>& m) : matriz(m) {
                     }
                 }
             }
-            throw runtime_error("Animal não encontrado na matriz!");
         }
 
 void Animal::imprimirMatriz(vector<vector<int>> &matrizAnimal){
@@ -109,7 +108,6 @@ void Animal::setMatrizOriginal(vector<vector<int>> &matrizOrig) {
 void Animal::Fugir(vector<vector<int>>& matrizParam,  vector<vector<int>>& matrizRastro) {
     segundaChance = false;
     if (matrizParam.empty() || matrizParam[0].empty()) {
-        cout << "Matriz vazia!" << endl;
         return;
     }
     if (parado == true && contadorIteracoes != 2)
@@ -151,6 +149,7 @@ void Animal::Fugir(vector<vector<int>>& matrizParam,  vector<vector<int>>& matri
             }
             
             if (matrizRastro[atual.linha][atual.coluna] == 4) {
+                addContaAgua();
                 parado = true;
                 florescerAmbiente(matrizParam, matrizRastro);
               
@@ -185,4 +184,25 @@ void Animal::setSegundaChance(bool segundaChan){
 }
 bool Animal::getSegundaChance(){
     return segundaChance;
+}
+void Animal::addContaAgua(){
+    contaAgua++;
+}
+int Animal::getContaAgua(){
+    return contaAgua;
+}
+void Animal::estaCercado(vector<vector<int>>& matrizRastro){
+    int i = posicaoAnimal.first;
+    int j = posicaoAnimal.second;
+    if (
+        (i + 1 >= linhas || matrizRastro[i + 1][j] == 2) &&  // Baixo
+        (j + 1 >= colunas || matrizRastro[i][j + 1] == 2) && // Direita
+        (i == 0 || matrizRastro[i - 1][j] == 2) &&           // Cima
+        (j == 0 || matrizRastro[i][j - 1] == 2)              // Esquerda
+    ) {
+        cercado = true;
+    }
+}
+bool Animal::getCercado(){
+    return cercado;
 }

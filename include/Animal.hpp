@@ -18,8 +18,8 @@ class Animal {
         pair<int, int> posicaoAnimal;
         pair<int, int> posicaoRastro;
         bool caminhoEncontrado;
-        int contaPassos=0;
-        bool parado=false;
+        int contaPassos=0, contaAgua=0;
+        bool parado=false, cercado=false;
         bool segundaChance=false;
         int contadorIteracoes=0;
 
@@ -50,6 +50,10 @@ class Animal {
         void florescerAmbiente(vector<vector<int>>& matrizParam,  vector<vector<int>>& matrizRastro);
         void setSegundaChance(bool segundaChan);
         bool getSegundaChance();
+        void addContaAgua();
+        int getContaAgua();
+        void estaCercado(vector<vector<int>>& matrizRastro);
+        bool getCercado();
     };
     
     

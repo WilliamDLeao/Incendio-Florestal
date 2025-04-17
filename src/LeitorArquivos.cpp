@@ -36,7 +36,7 @@ void LeitorArquivo::limpaArquivo() {
         exit(EXIT_FAILURE);
     }
 }
-void LeitorArquivo::escreveArquivo(const vector<vector<int>>& matriz, int passos, int iteracao) {
+void LeitorArquivo::escreveArquivo(const vector<vector<int>>& matriz, int passos, int iteracao, int contaAgua, bool cercado) {
     ofstream outFile(nomeArquivoSaida.c_str(), ios::app); 
     if (!outFile) {
         cerr << "Não foi possível abrir o arquivo de saída: " << nomeArquivoSaida << "\n";
@@ -52,7 +52,14 @@ void LeitorArquivo::escreveArquivo(const vector<vector<int>>& matriz, int passos
         outFile << '\n';
     }
 
-    outFile << "Passos: " << passos << "\n\n";
+    if (cercado == true)
+    {
+        outFile << "Animal cercado." << "\n";
+    }
+    
+    outFile << "Passos: " << passos << "\n";
+    outFile << "Encontrou agua: " << contaAgua << "\n\n";
+
 }
 
 void LeitorArquivo::exibeMatriz(const vector<vector<char>>& matriz) {
