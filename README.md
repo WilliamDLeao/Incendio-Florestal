@@ -1,6 +1,5 @@
 # **🌿🔥 Simulador de Fuga Animal em Incêndio Florestal**  
 
-[![Licença](https://img.shields.io/badge/license-MIT-blue)](LICENSE)  
 *Um simulador que modela o comportamento de um animal tentando escapar de um incêndio florestal em um ambiente dinâmico.*  
 
 ---
