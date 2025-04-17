@@ -46,24 +46,24 @@ int main(){
             break;
             
             case 1:
-                fogo.alastrarFogoCima(matriz, linha, coluna);
-                fogo.alastrarFogoCima(matrizRastro, linha, coluna);
+                fogo.alastrarFogoCima(matriz, linha, coluna, animal2);
+                fogo.alastrarFogoCima(matrizRastro, linha, coluna, animal2);
                 break;
         
             case 2:
-                fogo.alastrarFogoDireita(matriz, linha, coluna);
-                fogo.alastrarFogoDireita(matrizRastro, linha, coluna);
+                fogo.alastrarFogoDireita(matriz, linha, coluna, animal2);
+                fogo.alastrarFogoDireita(matrizRastro, linha, coluna, animal2);
             break;
 
             case 3:
-                fogo.alastrarFogoBaixo(matriz, linha, coluna);
-                fogo.alastrarFogoBaixo(matrizRastro, linha, coluna);
+                fogo.alastrarFogoBaixo(matriz, linha, coluna, animal2);
+                fogo.alastrarFogoBaixo(matrizRastro, linha, coluna, animal2);
 
             break;
 
             case 4:
-                fogo.alastrarFogoEsquerda(matriz, linha, coluna);
-                fogo.alastrarFogoEsquerda(matrizRastro, linha, coluna);
+                fogo.alastrarFogoEsquerda(matriz, linha, coluna, animal2);
+                fogo.alastrarFogoEsquerda(matrizRastro, linha, coluna, animal2);
             break;
             
         }

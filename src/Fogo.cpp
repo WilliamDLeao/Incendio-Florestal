@@ -44,11 +44,23 @@ void Fogo::alastrarFogoSemVento(vector<vector<int>> &matriz, int linha, int colu
         
     }
 }
-void Fogo::alastrarFogoBaixo(vector<vector<int>> &matriz, int linha, int coluna ){
+void Fogo::alastrarFogoBaixo(vector<vector<int>> &matriz, int linha, int coluna, Animal& animal){
+    if (animal.getSegundaChance() == true)
+    {
+        return;
+    }
+
     for (int x = 0; x < linha; x++) 
     {
         for (int y = 0; y < coluna; y++)
         {
+            if (matriz[x][y] == 2)
+            {
+                if (x + 1 < linha && matriz[x+1][y] == 5) animal.setSegundaChance(true);
+                if (x - 1 >= 0 && matriz[x-1][y] == 5) animal.setSegundaChance(true);
+                if (y + 1 < coluna && matriz[x][y+1] == 5) animal.setSegundaChance(true);
+                if (y - 1 >= 0 && matriz[x][y-1] == 5) animal.setSegundaChance(true);            
+            }       
             if (matriz[x][y] == 2)
             {
                 if (x + 1 < linha && matriz[x+1][y] == 1) matriz[x + 1][y] = 7;
@@ -70,11 +82,22 @@ void Fogo::alastrarFogoBaixo(vector<vector<int>> &matriz, int linha, int coluna 
     }
 }
 
-void Fogo::alastrarFogoDireita(vector<vector<int>> &matriz, int linha, int coluna ){
+void Fogo::alastrarFogoDireita(vector<vector<int>> &matriz, int linha, int coluna, Animal& animal){
+    if (animal.getSegundaChance() == true)
+    {
+        return;
+    }
     for (int x = 0; x < linha; x++) 
     {
         for (int y = 0; y < coluna; y++)
         {
+            if (matriz[x][y] == 2)
+            {
+                if (x + 1 < linha && matriz[x+1][y] == 5) animal.setSegundaChance(true);
+                if (x - 1 >= 0 && matriz[x-1][y] == 5) animal.setSegundaChance(true);
+                if (y + 1 < coluna && matriz[x][y+1] == 5) animal.setSegundaChance(true);
+                if (y - 1 >= 0 && matriz[x][y-1] == 5) animal.setSegundaChance(true);            
+            }       
             if (matriz[x][y] == 2)
             {
                 if (y + 1 < coluna && matriz[x][y+1] == 1) matriz[x][y + 1] = 7;
@@ -96,11 +119,22 @@ void Fogo::alastrarFogoDireita(vector<vector<int>> &matriz, int linha, int colun
     }
 }
 
-void Fogo::alastrarFogoCima(vector<vector<int>> &matriz, int linha, int coluna ){
+void Fogo::alastrarFogoCima(vector<vector<int>> &matriz, int linha, int coluna, Animal& animal){
+    if (animal.getSegundaChance() == true)
+    {
+        return;
+    }
     for (int x = 0; x < linha; x++) 
     {
         for (int y = 0; y < coluna; y++)
         {
+            if (matriz[x][y] == 2)
+            {
+                if (x + 1 < linha && matriz[x+1][y] == 5) animal.setSegundaChance(true);
+                if (x - 1 >= 0 && matriz[x-1][y] == 5) animal.setSegundaChance(true);
+                if (y + 1 < coluna && matriz[x][y+1] == 5) animal.setSegundaChance(true);
+                if (y - 1 >= 0 && matriz[x][y-1] == 5) animal.setSegundaChance(true);            
+            }       
             if (matriz[x][y] == 2)
             {
                 if (x - 1 >= 0 && matriz[x-1][y] == 1) matriz[x - 1][y] = 7;
@@ -122,11 +156,22 @@ void Fogo::alastrarFogoCima(vector<vector<int>> &matriz, int linha, int coluna )
     }
 }
 
-void Fogo::alastrarFogoEsquerda(vector<vector<int>> &matriz, int linha, int coluna ){
+void Fogo::alastrarFogoEsquerda(vector<vector<int>> &matriz, int linha, int coluna, Animal& animal){
+    if (animal.getSegundaChance() == true)
+    {
+        return;
+    }
     for (int x = 0; x < linha; x++) 
     {
         for (int y = 0; y < coluna; y++)
         {
+            if (matriz[x][y] == 2)
+            {
+                if (x + 1 < linha && matriz[x+1][y] == 5) animal.setSegundaChance(true);
+                if (x - 1 >= 0 && matriz[x-1][y] == 5) animal.setSegundaChance(true);
+                if (y + 1 < coluna && matriz[x][y+1] == 5) animal.setSegundaChance(true);
+                if (y - 1 >= 0 && matriz[x][y-1] == 5) animal.setSegundaChance(true);            
+            }       
             if (matriz[x][y] == 2)
             {
                 if (y - 1 >= 0 && matriz[x][y-1] == 1) matriz[x][y - 1] = 7;            
@@ -148,7 +193,7 @@ void Fogo::alastrarFogoEsquerda(vector<vector<int>> &matriz, int linha, int colu
     }
 }
 
-void Fogo::delayPropagacao(vector<vector<int>> &matrizAux, int linha, int coluna ){
+void Fogo::delayPropagacao(vector<vector<int>> &matrizAux, int linha, int coluna){
     
     for (int x = 0; x < linha; x++)
     {
