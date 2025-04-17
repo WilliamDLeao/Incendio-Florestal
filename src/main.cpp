@@ -3,8 +3,6 @@
 #include "Fogo.hpp"
 #include "Animal.hpp"
 
-int numIteracao=0;
-
 int main(){
 
     Config config;
