@@ -4,7 +4,7 @@
 
 ---
 
-## **📌 Visão Geral**  
+## **📌 Visão Gera**  
 Este projeto simula a fuga de um animal em um cenário de incêndio florestal, utilizando:  
 ✔ **Matrizes** para representar o terreno, fogo e caminhos percorridos.  
 ✔ **Algoritmo de prioridade** para decisões de movimento.  
@@ -13,20 +13,22 @@ Este projeto simula a fuga de um animal em um cenário de incêndio florestal, u
 
 ---
 
-## **🚀 Funcionalidades**  
+## **🚀 Especificação do Problema**  
 ### **1. Sistema de Movimentação do Animal**  
+- O animal é inserido na primeira posição segura (`0`) da matriz.
 - Prioriza rotas seguras (água > terra > vegetação).  
-- Pausa por 2 iterações ao encontrar água, regenerando o ambiente.  
-- Marca caminhos percorridos (`8`).  
+- Pausa por 3 iterações ao encontrar água, regenerando o ambiente nas posições ortogonais(recebem 1).  
+- Marca caminhos percorridos (`8`) apenas na matriz destinada ao percurso do animal (matrizRastro).
 
 ### **2. Propagação Dinâmica do Fogo**  
 - **5 modos de vento** (sem vento, cima, baixo, esquerda, direita).  
-- **Segunda chance**: Se o fogo chegar perto, o animal tenta uma rota alternativa.  
-- Árvores queimadas (`3`) não pegam fogo novamente.  
+- **Segunda chance**: Se o fogo queimar a posição atual, o animal tenta uma rota alternativa.  
+- Árvores queimadas (`3`) não pegam fogo novamente.
+- O fogo não queima água (`4`).
 
 ### **3. Controle por Arquivo**  
 - Entrada: Define terreno, posição inicial do fogo e animal.  
-- Saída: Gera relatório completo de cada iteração.  
+- Saída: apaga o que estava previamente no arquivo e gera relatório completo de cada iteração, contendo número de passos, iterações, quanto de água foi encontrado e se o animal está cercado.  
 
 ---
 
@@ -37,10 +39,10 @@ Este projeto simula a fuga de um animal em um cenário de incêndio florestal, u
 
 ### **Compilação e Execução**  
 ```bash
-# Compilar
+# Limpar
 make clear
 
-# Executar
+# Compilar e Rodar
 make
 ```
 
@@ -75,8 +77,8 @@ make
 ├── Animal.hpp/cpp            # Lógica do animal
 ├── Fogo.hpp/cpp              # Propagação do incêndio
 ├── LeitorArquivos.hpp/cpp    # Leitura/escrita de arquivos
-├── Config.hpp/cpp            # Parâmetros (ventos, iterações)
-├── entrada.txt               # Exemplo de configuração
+├── Config.hpp/cpp            # Configuração de parâmetros (ventos, iterações)
+├── entrada.txt               # Entrada de dados
 └── saida.txt                 # Saída gerada
 ```
 
