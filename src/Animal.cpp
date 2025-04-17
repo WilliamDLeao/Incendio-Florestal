@@ -183,17 +183,19 @@ void Animal::florescerAmbiente(vector<vector<int>>& matrizParam, vector<vector<i
 void Animal::setMatrizOriginal(vector<vector<int>> &matrizOrig) {
     matrizOriginal = matrizOrig;
 }
+
 void Animal::Fugir(vector<vector<int>>& matrizParam,  vector<vector<int>>& matrizRastro) {
+    segundaChance = false;
     if (matrizParam.empty() || matrizParam[0].empty()) {
         cout << "Matriz vazia!" << endl;
         return;
     }
-    if (parado == true && contadorIteracoes != 3)
+    if (parado == true && contadorIteracoes != 2)
     {
         contadorIteracoes++;
         return;
     }
-    if (parado == true && contadorIteracoes == 3)
+    if (parado == true && contadorIteracoes == 2)
     {
         parado = false;
         contadorIteracoes = 0;
@@ -226,13 +228,12 @@ void Animal::Fugir(vector<vector<int>>& matrizParam,  vector<vector<int>>& matri
 
             // Marca a última posição (8)
             if (anterior.first != -1) {
-                matrizParam[anterior.first][anterior.second] = 8;//o erro ta aq, ele nn vai colocar na mtriz de param, vai ser na que tem a visão do animal
+                matrizParam[anterior.first][anterior.second] = 8;
             }
             
             if (matrizRastro[atual.linha][atual.coluna] == 4) {
                 parado = true;
                 florescerAmbiente(matrizParam, matrizRastro);
-                 // Modifica matriz (para efeito imediato no jogo)
               
             }
             
@@ -262,4 +263,10 @@ void Animal::Fugir(vector<vector<int>>& matrizParam,  vector<vector<int>>& matri
     }
 
     cout << "Animal não conseguiu encontrar uma rota segura!" << endl;
+}
+void Animal::setSegundaChance(bool segundaChan){
+    segundaChance = segundaChan;
+}
+bool Animal::getSegundaChance(){
+    return segundaChance;
 }

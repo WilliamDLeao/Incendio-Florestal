@@ -29,9 +29,8 @@ int main(){
     
     while (cont<=config.getIteracoes())
     {
-        //agora eu tenho que fazer tudo oq acontece na matriz acontecer na Original. Porem, a Original nao vai ter o animal
         animal2.setMatriz(matrizTeste);
-        animal2.setMatrizOriginal(matriz); //aqui minha matriz main == matriz(a da funcao) 
+        animal2.setMatrizOriginal(matriz);
         animal2.Fugir(matriz, matrizRastro);
         animal2.imprimirMatriz(matriz);
         
@@ -42,8 +41,8 @@ int main(){
         switch (config.getVento())
         {
             case 0:
-            fogo.alastrarFogoSemVento(matriz, linha, coluna); 
-            fogo.alastrarFogoSemVento(matrizRastro, linha, coluna); 
+            fogo.alastrarFogoSemVento(matriz, linha, coluna, animal2); //animal2.getSegundaChance == true cancela isso aq
+            fogo.alastrarFogoSemVento(matrizRastro, linha, coluna, animal2); 
             break;
             
             case 1:

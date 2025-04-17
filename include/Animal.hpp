@@ -16,9 +16,11 @@ class Animal {
         vector<vector<int>> matrizOriginal;
         int linhas, colunas;
         pair<int, int> posicaoAnimal;
+        pair<int, int> posicaoRastro;
         bool caminhoEncontrado;
         int contaPassos=0;
         bool parado=false;
+        bool segundaChance=false;
         int contadorIteracoes=0;
 
         struct Celula {
@@ -46,6 +48,8 @@ class Animal {
         int getContaPassos();
         void addPassos();
         void florescerAmbiente(vector<vector<int>>& matrizParam,  vector<vector<int>>& matrizRastro);
+        void setSegundaChance(bool segundaChan);
+        bool getSegundaChance();
     };
     
     

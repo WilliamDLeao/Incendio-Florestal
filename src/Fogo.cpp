@@ -1,13 +1,26 @@
 #include "Fogo.hpp"
 #include "Config.hpp"
+#include "Animal.hpp"
 
 Fogo::Fogo(){}
 
-void Fogo::alastrarFogoSemVento(vector<vector<int>> &matriz, int linha, int coluna ){
+void Fogo::alastrarFogoSemVento(vector<vector<int>> &matriz, int linha, int coluna, Animal& animal){
+    if (animal.getSegundaChance() == true)
+    {
+        return;
+    }
+    
     for (int x = 0; x < linha; x++) 
     {
         for (int y = 0; y < coluna; y++)
-        {
+        {     
+            if (matriz[x][y] == 2)
+            {
+                if (x + 1 < linha && matriz[x+1][y] == 5) animal.setSegundaChance(true);
+                if (x - 1 >= 0 && matriz[x-1][y] == 5) animal.setSegundaChance(true);
+                if (y + 1 < coluna && matriz[x][y+1] == 5) animal.setSegundaChance(true);
+                if (y - 1 >= 0 && matriz[x][y-1] == 5) animal.setSegundaChance(true);            
+            }       
             if (matriz[x][y] == 2)
             {
                 if (x + 1 < linha && matriz[x+1][y] == 1) matriz[x + 1][y] = 7;
@@ -182,3 +195,6 @@ void Fogo::transfereFogoMatrizAuxiliar(vector<vector<int>> &matriz,vector<vector
     }
 }
     
+void Fogo::segundaChance(){
+    cout << "FOGOOOOOOO\n";
+}
