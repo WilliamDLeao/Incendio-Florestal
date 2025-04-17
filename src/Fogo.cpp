@@ -195,6 +195,3 @@ void Fogo::transfereFogoMatrizAuxiliar(vector<vector<int>> &matriz,vector<vector
     }
 }
     
-void Fogo::segundaChance(){
-    cout << "FOGOOOOOOO\n";
-}

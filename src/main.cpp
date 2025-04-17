@@ -41,7 +41,7 @@ int main(){
         switch (config.getVento())
         {
             case 0:
-            fogo.alastrarFogoSemVento(matriz, linha, coluna, animal2); //animal2.getSegundaChance == true cancela isso aq
+            fogo.alastrarFogoSemVento(matriz, linha, coluna, animal2); 
             fogo.alastrarFogoSemVento(matrizRastro, linha, coluna, animal2); 
             break;
             
@@ -68,7 +68,6 @@ int main(){
             
         }
         fogo.delayPropagacao(matrizAuxFogo, linha, coluna);
-        //leitorArquivo.escreveArquivo(matriz, animal2.getContaPassos(), cont);
         leitorArquivo.escreveArquivo(matrizRastro, animal2.getContaPassos(), cont);
 
         cont++;
