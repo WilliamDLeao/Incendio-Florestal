@@ -27,10 +27,6 @@ int main(){
     
     while (cont<=config.getIteracoes())
     {
-        animal2.setMatriz(matrizTeste);
-        animal2.setMatrizOriginal(matriz);
-
-                
         animal2.Fugir(matriz, matrizRastro);
         animal2.imprimirMatriz(matriz);
         
@@ -45,8 +41,8 @@ int main(){
         switch (config.getVento())
         {
             case 0:
-            fogo.alastrarFogoSemVento(matriz, linha, coluna, animal2);  //é a porra do switch case
-            fogo.alastrarFogoSemVento(matrizRastro, linha, coluna, animal2); 
+                fogo.alastrarFogoSemVento(matriz, linha, coluna, animal2);  
+                fogo.alastrarFogoSemVento(matrizRastro, linha, coluna, animal2); 
             break;
             
             case 1:

@@ -34,11 +34,11 @@ bool Animal::foiCaminhoEncontrado() {
 }
 
 int Animal::obterPrioridade(int valor){
-    if (valor == 4) return 5;      // Máxima prioridade
+    if (valor == 4) return 5;      
     else if (valor == 0) return 4; 
     else if (valor == 1) return 3;
     else if (valor == 3) return 2;
-    else if (valor == 8) return 1; // Caminho percorrido - menor prioridade
+    else if (valor == 8) return 1; 
     else if (valor == 5) return 0; 
     else return -1;               
 }
@@ -195,10 +195,10 @@ void Animal::estaCercado(vector<vector<int>>& matrizRastro){
     int i = posicaoAnimal.first;
     int j = posicaoAnimal.second;
     if (
-        (i + 1 >= linhas || matrizRastro[i + 1][j] == 2) &&  // Baixo
-        (j + 1 >= colunas || matrizRastro[i][j + 1] == 2) && // Direita
-        (i == 0 || matrizRastro[i - 1][j] == 2) &&           // Cima
-        (j == 0 || matrizRastro[i][j - 1] == 2)              // Esquerda
+        (i + 1 >= linhas || matrizRastro[i + 1][j] == 2) &&  
+        (j + 1 >= colunas || matrizRastro[i][j + 1] == 2) && 
+        (i == 0 || matrizRastro[i - 1][j] == 2) &&           
+        (j == 0 || matrizRastro[i][j - 1] == 2)              
     ) {
         cercado = true;
     }
