@@ -29,6 +29,8 @@ int main(){
     {
         animal2.setMatriz(matrizTeste);
         animal2.setMatrizOriginal(matriz);
+
+                
         animal2.Fugir(matriz, matrizRastro);
         animal2.imprimirMatriz(matriz);
         
@@ -36,10 +38,14 @@ int main(){
         fogo.transfereFogoMatrizAuxiliar(matrizRastro, matrizAuxFogo, linha, coluna);
         fogo.alteraEstadoArvoreComFogo(matriz, matrizAuxFogo, linha, coluna);
         fogo.alteraEstadoArvoreComFogo(matrizRastro, matrizAuxFogo, linha, coluna);
+        if (config.getVento() == 0)
+        {
+        }
+        
         switch (config.getVento())
         {
             case 0:
-            fogo.alastrarFogoSemVento(matriz, linha, coluna, animal2); 
+            fogo.alastrarFogoSemVento(matriz, linha, coluna, animal2);  //é a porra do switch case
             fogo.alastrarFogoSemVento(matrizRastro, linha, coluna, animal2); 
             break;
             
@@ -65,9 +71,9 @@ int main(){
             break;
             
         }
-        fogo.delayPropagacao(matrizAuxFogo, linha, coluna);
         animal2.estaCercado(matrizRastro);
         leitorArquivo.escreveArquivo(matrizRastro, animal2.getContaPassos(), cont, animal2.getContaAgua(), animal2.getCercado());
+        fogo.delayPropagacao(matrizAuxFogo, linha, coluna);
         if (animal2.getCercado() == true)
         {
             return 0;

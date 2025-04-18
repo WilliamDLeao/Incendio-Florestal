@@ -3,7 +3,7 @@
 #include "Animal.hpp"
 
 Fogo::Fogo(){}
-
+/*
 void Fogo::alastrarFogoSemVento(vector<vector<int>> &matriz, int linha, int coluna, Animal& animal){
     if (animal.getSegundaChance() == true)
     {
@@ -42,6 +42,45 @@ void Fogo::alastrarFogoSemVento(vector<vector<int>> &matriz, int linha, int colu
             
         }
         
+    }
+}
+    */
+   void Fogo::alastrarFogoSemVento(vector<vector<int>> &matriz, int linha, int coluna, Animal& animal) {
+    // Cria lista de posições que serão queimadas
+    vector<pair<int, int>> queimar;
+    bool animalAmeacado = false;
+
+    // Primeira passada: detecta o que vai queimar e verifica animal
+    for (int x = 0; x < linha; x++) {
+        for (int y = 0; y < coluna; y++) {
+            if (matriz[x][y] == 2) { // Se é fogo
+                // Verifica se o animal está adjacente
+                if (!animalAmeacado) {
+                    if (x + 1 < linha && matriz[x+1][y] == 5) animalAmeacado = true;
+                    if (x - 1 >= 0 && matriz[x-1][y] == 5) animalAmeacado = true;
+                    if (y + 1 < coluna && matriz[x][y+1] == 5) animalAmeacado = true;
+                    if (y - 1 >= 0 && matriz[x][y-1] == 5) animalAmeacado = true;
+                }
+                
+                // Marca árvores adjacentes para queimar
+                if (x + 1 < linha && matriz[x+1][y] == 1) queimar.push_back({x+1, y});
+                if (x - 1 >= 0 && matriz[x-1][y] == 1) queimar.push_back({x-1, y});
+                if (y + 1 < coluna && matriz[x][y+1] == 1) queimar.push_back({x, y+1});
+                if (y - 1 >= 0 && matriz[x][y-1] == 1) queimar.push_back({x, y-1});
+            }
+        }
+    }
+
+    // Atualiza estado do animal
+    if (animalAmeacado) {
+        animal.setSegundaChance(true);
+    }
+
+    // Segunda passada: aplica as queimadas
+    for (auto &pos : queimar) {
+        int x = pos.first;
+        int y = pos.second;
+        matriz[x][y] = 2; // Muda diretamente para fogo
     }
 }
 void Fogo::alastrarFogoBaixo(vector<vector<int>> &matriz, int linha, int coluna, Animal& animal){

@@ -88,10 +88,10 @@ void Animal::florescerAmbiente(vector<vector<int>>& matrizParam, vector<vector<i
 
     // modifica matriz que o animal anda
     matrizParam[i][j] = 5; 
-    if (i + 1 < linhas) matrizParam[i + 1][j] = 1;
-    if (j + 1 < colunas) matrizParam[i][j + 1] = 1;
-    if (i - 1 >= 0) matrizParam[i - 1][j] = 1;
-    if (j - 1 >= 0) matrizParam[i][j - 1] = 1;
+    if (i + 1 < linhas && matrizParam[i + 1][j] != 8) matrizParam[i + 1][j] = 1;
+    if (j + 1 < colunas && matrizParam[i][j + 1] != 8) matrizParam[i][j + 1] = 1;
+    if (i - 1 >= 0 && matrizParam[i - 1][j] != 8) matrizParam[i - 1][j] = 1;
+    if (j - 1 >= 0 && matrizParam[i][j - 1] != 8) matrizParam[i][j - 1] = 1;
 
     // modifica matriz que o animal não anda
     matrizRastro[i][j] = 0;
@@ -110,21 +110,21 @@ void Animal::Fugir(vector<vector<int>>& matrizParam,  vector<vector<int>>& matri
     if (matrizParam.empty() || matrizParam[0].empty()) {
         return;
     }
-    if (parado == true && contadorIteracoes != 2)
+    if (parado == true && contadorIteracoes != 3)
     {
         contadorIteracoes++;
         return;
     }
-    if (parado == true && contadorIteracoes == 2)
+    if (parado == true && contadorIteracoes == 3)
     {
         parado = false;
         contadorIteracoes = 0;
     }
     
+    addPassos();
     
     const int dir_linha[] = {-1, 1, 0, 0};
     const int dir_coluna[] = {0, 0, -1, 1};
-    addPassos();
     int linhas = matrizParam.size();
     int colunas = matrizParam[0].size();
     vector<vector<bool>> visitado(linhas, vector<bool>(colunas, false));
