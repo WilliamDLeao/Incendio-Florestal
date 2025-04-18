@@ -28,8 +28,7 @@ int main(){
     while (cont<=config.getIteracoes())
     {
         animal2.Fugir(matriz, matrizRastro);
-        animal2.imprimirMatriz(matriz);
-        
+                
         fogo.transfereFogoMatrizAuxiliar(matriz, matrizAuxFogo, linha, coluna);
         fogo.transfereFogoMatrizAuxiliar(matrizRastro, matrizAuxFogo, linha, coluna);
         fogo.alteraEstadoArvoreComFogo(matriz, matrizAuxFogo, linha, coluna);
