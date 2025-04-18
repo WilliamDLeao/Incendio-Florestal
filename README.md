@@ -4,7 +4,7 @@
 
 ---
 
-## **📌 Visão Gera**  
+## **📌 Visão Geral**  
 Este projeto simula a fuga de um animal em um cenário de incêndio florestal, utilizando:  
 ✔ **Matrizes** para representar o terreno, fogo e caminhos percorridos.  
 ✔ **Algoritmo de prioridade** para decisões de movimento.  
@@ -87,11 +87,13 @@ make
 ## **🎯 Exemplo de Saída**  
 ```plaintext
 Iteração número 5:
-0 1 5 3 4 ...
-1 2 0 8 1 ...
-Passos: 12
-Encontrou agua: 2
-Animal cercado.  # Se aplicável
+3 3 3 3 4 
+3 3 3 3 3 
+3 3 3 3 4 
+0 2 3 2 2 
+1 0 2 0 4 
+Passos: 3
+Encontrou agua: 1
 ```
 
 ---
@@ -104,7 +106,6 @@ Animal cercado.  # Se aplicável
 A classe `Config` centraliza os ajustes que controlam o comportamento da simulação:  
 - **Direção do vento**: Influencia a propagação do fogo  
 - **Número de iterações**: Define a duração máxima da simulação  
-- **Extensível**: Pode ser modificada para incluir novos parâmetros  
 
 ---
 
@@ -114,10 +115,10 @@ A classe `Config` centraliza os ajustes que controlam o comportamento da simula�
 | Valor | Direção    | Efeito no Fogo                     |  
 |-------|------------|-------------------------------------|  
 | `0`   | Sem vento  | Propaga igualmente em todas as direções |  
-| `1`   | Cima       | Expande principalmente para cima    |  
-| `2`   | Direita    | Propaga mais rápido para a direita  |  
-| `3`   | Baixo      | Fogo avança para baixo              |  
-| `4`   | Esquerda   | Tendência de propagar à esquerda    |  
+| `1`   | Cima       | Expande unicamente para cima    |  
+| `2`   | Direita    | Propaga unicamente para a direita  |  
+| `3`   | Baixo      | Fogo avança exclusivamente para baixo              |  
+| `4`   | Esquerda   | Propaga exclusivamente à esquerda    |  
 
 ### **2. Gerenciamento de Tempo**  
 - `iteracoes`: Número máximo de ciclos da simulação  
@@ -129,23 +130,26 @@ A classe `Config` centraliza os ajustes que controlam o comportamento da simula�
 | Método               | Retorno    | Descrição                          |  
 |----------------------|------------|------------------------------------|  
 | `getVento()`         | `int`      | Retorna direção atual do vento     |  
-| `setVento(int)`      | `void`     | Altera direção do vento (0-4)      |  
 | `getIteracoes()`     | `int`      | Retorna total de iterações         |  
-| `setIteracoes(int)`  | `void`     | Define duração da simulação        |  
 
 ---
 
 ## **🛠️ Uso Básico**  
+- `Como alterar?`: é necessário alterar os valores DENTRO da classe config   
 
 ```cpp  
+//Config.hpp
+class Config {
+   private:
+    int iteracoes = 10; 
+    int vento = 0; 
+}
+
+//main
 #include "Config.hpp"  
 
 // 1. Inicialização  
 Config config;  
-
-// 2. Configuração  
-config.setVento(2);  // Vento para direita  
-config.setIteracoes(100);  
 
 // 3. Consulta  
 cout << "Vento: " << config.getVento();  
@@ -156,7 +160,7 @@ cout << "Iterações: " << config.getIteracoes();
 
 ## **⚙️ Fluxo de Integração**  
 1. **Inicialização**:  
-   - Valores padrão: `vento = 0`, `iteracoes = 50`  
+   - Valores padrão: `vento = 0`, `iteracoes = 10`  
 
 2. **Conexão com outras classes**:  
    - `Fogo.hpp`: Usa `getVento()` para determinar padrão de propagação  
@@ -174,11 +178,7 @@ Iterações: 200
 ---
 
 ## **📌 Observações**  
-- **Validação**: Os métodos não verificam valores inválidos (ex: vento = 99)  
-- **Extensibilidade**: Pode ser expandida para incluir:  
-  - Umidade do ar  
-  - Intensidade do fogo  
-  - Dificuldade de movimento  
+- **Validação**: Os métodos não verificam valores inválidos (ex: vento = 99 ou iterações = -6) 
 
 ---
 
@@ -192,7 +192,6 @@ Iterações: 200
 A classe `Animal` controla a movimentação de um agente em uma matriz de ambiente, priorizando:  
 - **Fuga eficiente** de incêndios  
 - **Busca por recursos** (água)  
-- **Evitação de obstáculos** (fogo, terrenos perigosos)  
 
 ---
 
@@ -207,8 +206,8 @@ A classe `Animal` controla a movimentação de um agente em uma matriz de ambien
 | `8`   | Caminho       | 1          | Já percorrido (evita loops)            |  
 
 ### **2. Mecânicas Especiais**  
-- **Florescimento**: Ao encontrar água (`4`), transforma adjacências em terra segura (`0`).  
-- **Segunda chance**: Se o fogo atingir células vizinhas, ativa modo de emergência.  
+- **Florescimento**: Ao encontrar água (`4`), transforma TODAS as adjacências em árvores saudáveis(`1`).  
+- **Segunda chance**: Se o fogo atingir células vizinhas, ativa modo de segunda chance, na qual o animal tem mais uma oportunidade de escapar.  
 - **Detecção de cerco**: Verifica se está totalmente bloqueado pelo fogo.  
 
 ---
@@ -227,6 +226,16 @@ A classe `Animal` controla a movimentação de um agente em uma matriz de ambien
 | `getContaPassos()` | Retorna total de movimentos |  
 | `getContaAgua()` | Conta quantas vezes encontrou água |  
 | `setSegundaChance()` | Ativa/desativa modo emergência |  
+
+### **Diferenciação das matrizes**  
+| matriz | matrizRastro |  
+|--------|-----------|  
+| Fogo | Fogo |  
+| Florescer | Florescer |  
+| Árvores queimadas | Árvores queimadas |  
+| Animal |  
+| Caminho percorrido | 
+- **Nota**: O nome `matrizRastro` não é porque ela armazena o rastro do animal (quem faz isso é `matriz`), mas porque ela funciona como um "espelho" da matriz na qual o animal anda. Todas as consequências do percurso do animal são refletidas na matrizRastro, e por isso esse nome.  
 
 ### **Utilitários**  
 ```cpp  
@@ -265,24 +274,160 @@ cout << "Passos: " << animal.getContaPassos();
    - Atualiza matriz com caminho percorrido (`8`).  
 
 3. **Eventos**:  
-   - Encontro com água → Pausa 2 iterações + florescimento.  
+   - Encontro com água → Pausa 3 iterações + florescimento.  
    - Fogo adjacente → Ativa `segundaChance`.  
 
 ---
+# **Método Principal: `Fugir()` - Classe Animal**  
 
-## **📊 Exemplo de Saída**  
-```plaintext  
-Matriz Atual:  
-0 1 5  
-2 8 4  
-Passos: 3 | Água: 1  
-```  
+*Implementa o algoritmo de busca de caminho prioritário para fuga do animal em ambiente com incêndio.*
 
+---
+
+## **📌 Visão Geral**
+Método responsável por:
+- **Encontrar rotas seguras** usando busca prioritária 
+- **Gerenciar estados especiais** (encontro com água, cercamento)
+- **Atualizar matrizes** de ambiente e rastro
+
+---
+
+## **📜 Declaração**
+```cpp
+void Fugir(vector<vector<int>>& matrizParam, vector<vector<int>>& matrizRastro);
+```
+
+| Parâmetro | Tipo | Descrição |
+|-----------|------|-----------|
+| `matrizParam` | `vector<vector<int>>&` | Matriz que o animal anda |
+| `matrizRastro` | `vector<vector<int>>&` | Matriz do ambiente |
+
+---
+
+## **⚙️ Fluxo do Algoritmo**
+
+```mermaid
+graph TD
+    A[Início] --> B{Está parado?}
+    B -->|Sim| C[Incrementa contador]
+    B -->|Não| D[Adiciona passo]
+    D --> E[Busca prioritária]
+    E --> F{Encontrou posição segura?}
+    F -->|Sim| G[Atualiza posição]
+    F -->|Não| H[Expande vizinhos]
+    G --> I{Encontrou água?}
+    I -->|Sim| J[Ativa estado parado]
+```
+
+---
+
+## **🔍 Lógica Detalhada**
+
+### **1. Controle de Estado**
+```cpp
+if (parado == true && contadorIteracoes != 3) {
+    contadorIteracoes++;
+    return; // Pausa movimento por 3 iterações
+}
+```
+- Acionado quando o animal encontra água (`4`)
+- Permite regeneração do ambiente via `florescerAmbiente()`
+- Faz com que o animal fique parado por 3 iterações (tem prioridade sobre `segunda chance`)
+
+### **2. Busca Prioritária**
+Componentes principais:
+- **Fila de prioridade**: Seleciona sempre a célula mais vantajosa
+- **Vetor de visitados**: Evita loops
+- **Matriz de origem**: Reconstrução do caminho
+
+```cpp
+priority_queue<Celula> fila;
+fila.push({posicaoAtual, prioridade});
+```
+
+### **3. Avaliação de Células**
+```cpp
+int prioridade = obterPrioridade(matrizParam[novaLinha][novaColuna]);
+```
+Prioridades definidas por:
+| Valor | Terreno | Prioridade | 
+|-------|---------|------------|
+| 4 | Água | 5 (Máxima) | 
+| 0 | Terra | 4 |
+| 1 | Vegetação | 3 | 
+| 3 | Árvore queimada | 2 |
+| 8 | Caminho anterior | 1 |
+
+### **4. Atualização do Ambiente**
+```cpp
+matrizParam[novaLinha][novaColuna] = 5; // Nova posição
+matrizParam[anterior] = 8; // Marca caminho
+```
+
+---
+
+## **⚠️ Tratamento de Casos Especiais**
+
+### **Animal Cercado**
+```cpp
+if (fila.empty()) {
+    // Nenhum caminho válido encontrado
+    caminhoEncontrado = false;
+}
+```
+
+### **Encontro com Água**
+```cpp
+if (matrizRastro[pos] == 4) {
+    addContaAgua();
+    parado = true; // Ativa pausa
+    florescerAmbiente(...);
+}
+```
+
+---
+
+## **📊 Estruturas de Dados**
+
+### **Struct `Celula` (Usada na fila)**
+```cpp
+struct Celula {
+    int linha, coluna;
+    int prioridade;
+    pair<int,int> origem;
+    
+    // Sobrecarga para comparação
+    bool operator<(const Celula& outro) const {
+        return prioridade < outro.prioridade;
+    }
+};
+```
+
+### **Matrizes Auxiliares**
+| Nome | Tipo | Função |
+|------|------|--------|
+| `visitado` | `vector<vector<bool>>` | Evita revisitar células |
+| `origem` | `vector<vector<pair<int,int>>>` | Registra caminho percorrido |
+
+---
+
+
+## **🛠️ Exemplo de Uso**
+```cpp
+Animal animal;
+vector<vector<int>> ambiente = leitor.lerArquivo();
+vector<vector<int>> rastro = ambiente;
+
+animal.Fugir(ambiente, rastro); // Executa um passo
+```
 ---
 
 ## **📌 Observações**  
 - **Eficiência**: Algoritmo ótimo para matrizes até 100x100.  
-- **Extensibilidade**: Adicione novos terrenos modificando `obterPrioridade()`.  
+- **Extensibilidade**: É possível adicionar novos terrenos modificando `obterPrioridade()`.  
+   - Não considera movimentos diagonais
+   - Prioridades fixas (não adaptativas)
+
 
 ---
 # **Classe Fogo**  
@@ -293,20 +438,9 @@ Passos: 3 | Água: 1
 
 ## **🔥 Visão Geral**  
 Modela o comportamento do fogo considerando:  
-- **5 modos de propagação** (sem vento + 4 direções cardeais)  
-- **Mecânica de atraso** (delay) para simular velocidade realista  
+- **5 modos de propagação** (sem vento + 4 direções ortogonais)  
+- **Mecânica de atraso** (delay) para simular velocidade realista
 - **Interação com o animal** (sistema de segunda chance)  
-
----
-
-## **🌪️ Sistema de Ventos**  
-| Valor | Método                  | Efeito                           |
-|-------|-------------------------|----------------------------------|
-| `0`   | `alastrarFogoSemVento()`| Propaga em todas as direções     |  
-| `1`   | `alastrarFogoCima()`    | Expansão preferencial para cima  |
-| `2`   | `alastrarFogoDireita()` | Fogo avança mais à direita       |
-| `3`   | `alastrarFogoBaixo()`   | Propagação acelerada para baixo  |
-| `4`   | `alastrarFogoEsquerda()`| Tendência forte à esquerda       |
 
 ---
 
@@ -325,7 +459,7 @@ Modela o comportamento do fogo considerando:
 | `alteraEstadoArvoreComFogo()` | Converte árvores queimadas (`2`→`3`) |
 
 ### **Interação com Animal**  
-- **Segunda chance**: Bloqueia propagação se fogo atingir adjacências do animal (`5`)  
+- **Segunda chance**: pausa a propagação de fogo por 1 iteração se ele atingir adjacências do animal (`5`), permitindo uma segunda chance . 
 
 ---
 
@@ -380,19 +514,125 @@ fogo.alteraEstadoArvoreComFogo(matriz, matrizAux, 10, 10);
       // ...
   }
   ```
-- Debug visual:  
-  ```cpp
-  cout << "Fogo em (" << x << "," << y << ")\n";
-  ```
 
 ---
+# **Método `alastrarFogoSemVento()` - Classe Fogo**
+
+*Implementa a propagação do fogo em todas as direções sem influência de vento, com mecanismo de detecção de ameaça ao animal.*
+
+## **🔥 Visão Geral**
+Responsável por:
+- Propagação do fogo em todas as direções
+- Detecção de ameaça iminente ao animal
+- Ativação do mecanismo de "segunda chance"
+- Queima controlada de vegetação adjacente
+
+## **📜 Assinatura do Método**
+```cpp
+void alastrarFogoSemVento(
+    vector<vector<int>>& matriz, 
+    int linha, 
+    int coluna, 
+    Animal& animal
+);
+```
+
+| Parâmetro | Tipo | Descrição |
+|-----------|------|-----------|
+| `matriz` | `vector<vector<int>>&` | Matriz do ambiente |
+| `linha` | `int` | Número de linhas da matriz |
+| `coluna` | `int` | Número de colunas da matriz |
+| `animal` | `Animal&` | Referência ao animal para controle de ameaça |
+
+## **⚙️ Fluxo de Execução**
+```mermaid
+graph TD
+    A[Início] --> B[Varredura da matriz]
+    B --> C{Encontrou fogo?}
+    C -->|Sim| D[Verifica adjacências]
+    D --> E{Animal ameaçado?}
+    E -->|Sim| F[Ativa segunda chance]
+    D --> G[Marca vegetação para queimar]
+    C -->|Não| H[Próxima célula]
+    G --> I[Queima marcadas]
+```
+
+## **🔍 Lógica Detalhada**
+
+### **1. Detecção de Ameaça ao Animal**
+```cpp
+if (matriz[x][y] == 2) {
+    // Verifica 4 direções cardeais
+    if (x+1 < linha && matriz[x+1][y] == 5) animalAmeacado = true;
+    ...
+}
+```
+- Ativa flag `animalAmeacado` se fogo estiver adjacente ao animal (valor 5)
+- Propagação imediata da informação via `setSegundaChance(true)`
+
+### **2. Mecanismo de Queima**
+```cpp
+vector<pair<int, int>> queimar;
+...
+if (x+1 < linha && matriz[x+1][y] == 1) 
+    queimar.push_back({x+1, y});
+```
+- Armazena posições de vegetação (valor 1) para queima posterior
+- Evita modificação imediata da matriz durante varredura
+
+### **3. Padrão de Propagação**
+```plaintext
+Antes:     Depois:      Próxima:
+  1          2             2
+1 2 1      2 2 2         2 3 2
+  1          2             2
+```
+- Queima todas as células de vegetação adjacentes
+- Mantém outros valores inalterados (água, terra, etc)
+
+## **⚠️ Tratamento Especial**
+### **Segunda Chance**
+```cpp
+if (animalAmeacado) {
+    animal.setSegundaChance(true);
+}
+```
+- Acionado quando fogo atinge:
+  - Posição imediatamente acima/abaixo
+  - Posição imediatamente aos lados
+- Permite ao animal reagir antes da próxima propagação
+
+## **📊 Estruturas de Dados**
+| Nome | Tipo | Função |
+|------|------|--------|
+| `queimar` | `vector<pair<int,int>>` | Refistro de posições para queima |
+| `animalAmeacado` | `bool` | Gatilho para acionar estado de 2 chance |
+
+## **🛠️ Exemplo de Uso**
+```cpp
+Fogo fogo;
+Animal animal;
+vector<vector<int>> ambiente = {
+    {0,1,0},
+    {2,0,1},
+    {0,1,5}
+};
+
+fogo.alastrarFogoSemVento(ambiente, 3, 3, animal);
+```
+
+## **📌 Observações**
+1. **Não-propagação**:
+   - Não queima água (4) ou árvores já queimadas (3)
+2. **Segurança**:
+   - Verifica limites da matriz antes de cada acesso
+3. **Extensibilidade**:
+   - Pode ser adaptado para diferentes padrões de propagação
 
 ## **📌 Limitações**  
 - Não modela:  
   - Fogo em diagonal  
   - Variações de intensidade  
-  - Propagação em 3D  
-
 ---
 # **Classe LeitorArquivo**  
 
@@ -405,7 +645,6 @@ Principais responsabilidades:
 - **Leitura** do arquivo de configuração inicial
 - **Escrita** do log de simulação passo a passo
 - **Validação** básica dos dados de entrada
-- **Exibição** auxiliar para debug
 
 ---
 
@@ -417,8 +656,7 @@ Principais responsabilidades:
 ```
 **Exemplo**:
 ```plaintext
-5 5
-1 2
+5 5 1 2
 0 1 0 3 4
 1 2 0 1 0
 0 1 1 0 1
@@ -494,18 +732,7 @@ Encontrou agua: Z
 
 ---
 
-## **💡 Dicas Avançadas**
-1. Para análise posterior:
-   ```bash
-   grep "Animal cercado" saida.txt
-   ```
-2. Modifique `exibeMatriz()` para colorir saída:
-   ```cpp
-   cout << "\033[31m" << elemento << "\033[0m"; // Vermelho para fogo
-   ```
-
----
-# **Simulador de Fuga Animal - Programa Principal**  
+# **Simulador de Fuga Animal - Main**  
 
 *Arquivo principal que orquestra toda a simulação de fuga animal em incêndio florestal, integrando todas as componentes do sistema.*
 
@@ -586,11 +813,9 @@ while (cont <= config.getIteracoes()) {
 
 | Nome | Tipo | Função |
 |------|------|--------|
-| `matriz` | `vector<vector<int>>` | Estado atual do ambiente |
+| `matriz` | `vector<vector<int>>` | Matriz que o animal percorre |
 | `matrizAuxFogo` | `vector<vector<int>>` | Controle auxiliar do fogo |
-| `matrizRastro` | `vector<vector<int>>` | Registro do caminho do animal |
-| `matrizTeste` | `vector<vector<int>>` | Cópia para cálculos |
-
+| `matrizRastro` | `vector<vector<int>>` | Matriz que representa o ambiente sem o animal e suas demarcações |
 ---
 
 ## **⚠️ Condições de Término**
@@ -607,32 +832,9 @@ while (cont <= config.getIteracoes()) {
 
 ---
 
-## **🛠️ Como Compilar e Executar**
-
-```bash
-# Compilar
-g++ -std=c++11 main.cpp Animal.cpp Fogo.cpp LeitorArquivos.cpp Config.cpp -o simulador
-
-# Executar
-./simulador
-```
-
 **Arquivos necessários**:
 - `entrada.txt`: Configuração inicial do ambiente
 - `saida.txt`: Gerado automaticamente com resultados
-
----
-
-## **📊 Saída Gerada**
-Exemplo do arquivo `saida.txt`:
-```plaintext
-Iteração número 5:
-0 1 5 3 4 
-1 2 0 8 1 
-Passos: 12 
-Encontrou agua: 2
-Animal cercado.
-```
 
 ---
 
@@ -642,19 +844,13 @@ Animal cercado.
    ```cpp
    animal2.imprimirMatriz(matriz); // Exibe estado atual
    ```
-
-2. Modifique em `Config`:
-   ```cpp
-   config.setVento(2); // Altera direção do vento
-   config.setIteracoes(200); // Aumenta iterações
-   ```
-
 ---
 
 ## **📌 Limitações Conhecidas**
 - Não suporta redimensionamento dinâmico do ambiente
 - Vento diagonal não implementado
 - Visualização em tempo real limitada
+- Por vezes, o delay de propagação do fogo e florescer ambiente entram em conflito por motivos desconhecidos. Isso pode gerar resultados inconsistentes.
 
 ---
 
