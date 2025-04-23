@@ -23,7 +23,7 @@ public:
 
     void limpaArquivo();
     void escreveArquivo(const vector<vector<int>>& matriz, int passos, int iteracao, int contaAgua, bool cercado);
-    void exibeMatriz(const vector<vector<char>>& matriz);
+    void exibeMatriz(const vector<vector<int>>& matriz);
  
     int leX();
     int leY();

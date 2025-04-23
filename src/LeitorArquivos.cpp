@@ -62,7 +62,7 @@ void LeitorArquivo::escreveArquivo(const vector<vector<int>>& matriz, int passos
 
 }
 
-void LeitorArquivo::exibeMatriz(const vector<vector<char>>& matriz) {
+void LeitorArquivo::exibeMatriz(const vector<vector<int>>& matriz) {
     cout << "\nConteúdo armazenado na matriz:\n";
     for (const auto& linha : matriz) {
         for (int elemento : linha) {

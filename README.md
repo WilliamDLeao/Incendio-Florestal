@@ -33,6 +33,10 @@ Este projeto simula a fuga de um animal em um cenário de incêndio florestal, u
 - Entrada: Define terreno, posição inicial do fogo e animal.  
 - Saída: apaga o que estava previamente no arquivo e gera relatório completo de cada iteração, contendo número de passos, iterações, quanto de água foi encontrado e se o animal está cercado.  
 
+### **4. Exibição da matriz do animal em tempo real**  
+- As alterações no ambiente são gravadas no arquivo "output.dat", enquanto o caminhar do animal é exibido no terminal e sua rota percorrida é demercada com (`8`).  
+
+
 ---
 
 ## **🛠️ Como Usar**  
@@ -43,7 +47,7 @@ Este projeto simula a fuga de um animal em um cenário de incêndio florestal, u
 ### **Compilação e Execução**  
 ```bash
 # Limpar
-make clear
+make clean
 
 # Compilar e Rodar
 make

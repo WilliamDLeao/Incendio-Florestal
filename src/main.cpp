@@ -33,9 +33,8 @@ int main(){
         fogo.transfereFogoMatrizAuxiliar(matrizRastro, matrizAuxFogo, linha, coluna);
         fogo.alteraEstadoArvoreComFogo(matriz, matrizAuxFogo, linha, coluna);
         fogo.alteraEstadoArvoreComFogo(matrizRastro, matrizAuxFogo, linha, coluna);
-        if (config.getVento() == 0)
-        {
-        }
+        
+        animal2.imprimirMatriz(matriz);
         
         switch (config.getVento())
         {
