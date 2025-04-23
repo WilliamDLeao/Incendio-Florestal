@@ -213,3 +213,16 @@ void Fogo::transfereFogoMatrizAuxiliar(vector<vector<int>> &matriz,vector<vector
     }
 }
     
+bool Fogo::verificaFogo(vector<vector<int>> &matriz, int linha, int coluna){
+    for (int x = 0; x < linha; x++)
+    {
+        for (int y = 0; y < coluna; y++)
+        {
+            if (matriz[x][y] == 2) {
+                return true;
+            }
+        }
+        
+    }
+    return false;
+}

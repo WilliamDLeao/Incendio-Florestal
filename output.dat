@@ -61,30 +61,3 @@ Iteração número 7:
 Passos: 4
 Encontrou agua: 1
 
-Iteração número 8:
-3 3 3 3 4 
-3 3 3 3 3 
-3 3 3 3 4 
-0 3 3 3 3 
-1 0 3 0 4 
-Passos: 5
-Encontrou agua: 1
-
-Iteração número 9:
-3 3 3 3 4 
-3 3 3 3 3 
-3 3 3 3 4 
-0 3 3 3 3 
-1 0 3 0 4 
-Passos: 6
-Encontrou agua: 1
-
-Iteração número 10:
-3 3 3 3 4 
-3 3 3 3 3 
-3 3 3 3 4 
-0 3 3 3 3 
-1 0 3 0 4 
-Passos: 7
-Encontrou agua: 1
-

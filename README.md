@@ -283,6 +283,7 @@ cout << "Passos: " << animal.getContaPassos();
 3. **Eventos**:  
    - Encontro com água → Pausa 3 iterações + florescimento.  
    - Fogo adjacente → Ativa `segundaChance`.  
+   - Todas as árvores queimaram(ou seja, sem `2` na matriz) → Interrompe a simulação.
 
 ---
 # **Método Principal: `Fugir()` - Classe Animal**  
@@ -609,6 +610,9 @@ if (animalAmeacado) {
   - Posição imediatamente aos lados
 - Permite ao animal reagir antes da próxima propagação
 
+### **Todas as árvores queimaram?**
+-O método verificaFogo analisa se ainda há árvores para serem queimadas e retorna boolean(true, false). Na main, é utilizado para interromper o funcionamento do programa caso não existam mais árvores em chamas.
+
 ## **📊 Estruturas de Dados**
 | Nome | Tipo | Função |
 |------|------|--------|
@@ -933,33 +937,6 @@ while (cont <= config.getIteracoes()) {
       Passos: 4
       Encontrou agua: 1
 
-      Iteração número 8:
-      3 3 3 3 4 
-      3 3 3 3 3 
-      3 3 3 3 4 
-      0 3 3 3 3 
-      1 0 3 0 4 
-      Passos: 5
-      Encontrou agua: 1
-
-      Iteração número 9:
-      3 3 3 3 4 
-      3 3 3 3 3 
-      3 3 3 3 4 
-      0 3 3 3 3 
-      1 0 3 0 4 
-      Passos: 6
-      Encontrou agua: 1
-
-      Iteração número 10:
-      3 3 3 3 4 
-      3 3 3 3 3 
-      3 3 3 3 4 
-      0 3 3 3 3 
-      1 0 3 0 4 
-      Passos: 7
-      Encontrou agua: 1
-
    ```
    ```cpp
    //animal2.imprimirMatriz(matriz);
@@ -1004,24 +981,8 @@ while (cont <= config.getIteracoes()) {
       3 3 3 3 4 
       8 3 3 3 2 
       5 8 3 0 4 
-
-      3 3 3 3 4 
-      3 3 3 3 3 
-      3 3 3 3 4 
-      5 3 3 3 3 
-      8 8 3 0 4 
-
-      3 3 3 3 4 
-      3 3 3 3 3 
-      5 3 3 3 4 
-      8 3 3 3 3 
-      8 8 3 0 4 
-
-      3 3 3 3 4 
-      3 3 3 3 3 
-      5 3 3 3 4 
-      8 3 3 3 3 
-      8 8 3 0 4 
+      
+      //funcionamento interrompido devido a ausência de fogo
    ```
 2. **Exemplo 2**  
    -Justificativa: teste do desempenho do algoritmo em matrizes grandes

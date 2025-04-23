@@ -22,6 +22,7 @@ public:
     void delayPropagacao(vector<vector<int>> &matrizAux, int linha, int coluna );
     void alteraEstadoArvoreComFogo(vector<vector<int>> &matriz,vector<vector<int>> &matrizAux, int linha, int coluna );
     void transfereFogoMatrizAuxiliar(vector<vector<int>> &matriz,vector<vector<int>> &matrizAux, int linha, int coluna );
+    bool verificaFogo(vector<vector<int>> &matriz, int linha, int coluna);
 };
 
 #endif
