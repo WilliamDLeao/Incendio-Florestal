@@ -855,6 +855,7 @@ while (cont <= config.getIteracoes()) {
    ```cpp
    animal2.imprimirMatriz(matriz); // Exibe estado da matriz o qual o animal anda
    ```
+- **Exibição**: o método imprimirMatriz exibe a matriz com o animal e seu caminho, a partir da iteração 0 (ou seja, ele reexibe a entrada com o animal adicionado). Sendo assim, seu número de iterações exibidas é sempre 1 unidade a mais que do que as de output.dat.
 ---
 # **🧪Casos de Teste**
 
@@ -981,6 +982,12 @@ while (cont <= config.getIteracoes()) {
       3 3 3 3 4 
       8 3 3 3 2 
       5 8 3 0 4 
+
+      3 3 3 3 4 
+      3 3 3 3 3 
+      3 3 3 3 4 
+      5 3 3 3 3 
+      8 8 3 0 4 
       
       //funcionamento interrompido devido a ausência de fogo
    ```
@@ -1408,6 +1415,166 @@ while (cont <= config.getIteracoes()) {
       Encontrou agua: 1
 
       ```
+3. **Exemplo 3**  
+   -Justificativa: matriz que demonstra a prioridade de escolha segura do animal e a propagação correta do fogo
+
+   -Configuração: vento=0, iteracao=10
+   
+   ```cpp
+   //input.dat
+      5 5 1 1
+      2 1 1 1 4
+      0 0 0 0 1
+      0 0 0 0 1
+      0 0 0 0 1
+      2 1 1 1 1
+   ```
+   ```cpp
+      Iteração número 1:
+      2 2 1 1 4 
+      0 0 0 0 1 
+      0 0 0 0 1 
+      0 0 0 0 1 
+      2 2 1 1 1 
+      Passos: 1
+      Encontrou agua: 0
+
+      Iteração número 2:
+      3 2 2 1 4 
+      0 0 0 0 1 
+      0 0 0 0 1 
+      0 0 0 0 1 
+      3 2 2 1 1 
+      Passos: 2
+      Encontrou agua: 0
+
+      Iteração número 3:
+      3 3 2 2 4 
+      0 0 0 0 1 
+      0 0 0 0 1 
+      0 0 0 0 1 
+      3 3 2 2 1 
+      Passos: 3
+      Encontrou agua: 0
+
+      Iteração número 4:
+      3 3 3 2 4 
+      0 0 0 0 1 
+      0 0 0 0 1 
+      0 0 0 0 1 
+      3 3 3 2 2 
+      Passos: 4
+      Encontrou agua: 0
+
+      Iteração número 5:
+      3 3 3 3 4 
+      0 0 0 0 1 
+      0 0 0 0 1 
+      0 0 0 0 2 
+      3 3 3 3 2 
+      Passos: 5
+      Encontrou agua: 0
+
+      Iteração número 6:
+      3 3 3 3 4 
+      0 0 0 0 1 
+      0 0 0 0 2 
+      0 0 0 0 2 
+      3 3 3 3 3 
+      Passos: 6
+      Encontrou agua: 0
+
+      Iteração número 7:
+      3 3 3 3 4 
+      0 0 0 0 2 
+      0 0 0 0 2 
+      0 0 0 0 3 
+      3 3 3 3 3 
+      Passos: 7
+      Encontrou agua: 0
+
+      Iteração número 8:
+      3 3 3 3 4 
+      0 0 0 0 2 
+      0 0 0 0 3 
+      0 0 0 0 3 
+      3 3 3 3 3 
+      Passos: 8
+      Encontrou agua: 0
+
+      Iteração número 9:
+      3 3 3 3 4 
+      0 0 0 0 3 
+      0 0 0 0 3 
+      0 0 0 0 3 
+      3 3 3 3 3 
+      Passos: 9
+      Encontrou agua: 0
+      //termino do incêndio
+      ```
+   ```cpp
+   //animal2.imprimirMatriz(matriz);
+      2 1 1 1 4 
+      5 0 0 0 1 
+      0 0 0 0 1 
+      0 0 0 0 1 
+      2 1 1 1 1 
+
+      2 2 1 1 4 
+      8 0 0 0 1 
+      5 0 0 0 1 
+      0 0 0 0 1 
+      2 2 1 1 1 
+
+      3 2 2 1 4 
+      8 0 0 0 1 
+      8 0 0 0 1 
+      5 0 0 0 1 
+      3 2 2 1 1 
+
+      3 3 2 2 4 
+      8 0 0 0 1 
+      8 0 0 0 1 
+      8 5 0 0 1 
+      3 3 2 2 1 
+
+      3 3 3 2 4 
+      8 0 0 0 1 
+      8 5 0 0 1 
+      8 8 0 0 1 
+      3 3 3 2 2 
+
+      3 3 3 3 4 
+      8 5 0 0 1 
+      8 8 0 0 1 
+      8 8 0 0 2 
+      3 3 3 3 2 
+
+      3 3 3 3 4 
+      8 8 5 0 1 
+      8 8 0 0 2 
+      8 8 0 0 2 
+      3 3 3 3 3 
+
+      3 3 3 3 4 
+      8 8 8 0 2 
+      8 8 5 0 2 
+      8 8 0 0 3 
+      3 3 3 3 3 
+
+      3 3 3 3 4 
+      8 8 8 0 2 
+      8 8 8 0 3 
+      8 8 5 0 3 
+      3 3 3 3 3 
+
+      3 3 3 3 4 
+      8 8 8 0 3 
+      8 8 8 0 3 
+      8 8 8 5 3 
+      3 3 3 3 3 
+   ```
+
 
 
 ---
