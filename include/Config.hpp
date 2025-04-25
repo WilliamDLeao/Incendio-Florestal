@@ -11,7 +11,7 @@ using namespace std;
 
 class Config {
 private:
-    int iteracoes = 10;
+    int iteracoes = 20;
     int vento = 0; 
 public:
     Config();

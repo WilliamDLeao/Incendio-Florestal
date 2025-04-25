@@ -75,6 +75,7 @@ int main(){
         
         if (animal2.getCercado() == true)
         {
+            animal2.imprimirMatriz(matriz); //compensar a ausência de ultimo print em caso de cercado
             return 0;
         }
         

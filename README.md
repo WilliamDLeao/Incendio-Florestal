@@ -997,19 +997,248 @@ while (cont <= config.getIteracoes()) {
       //funcionamento interrompido devido a ausência de fogo
    ```
 2. **Exemplo 2**  
-   -Justificativa: teste do desempenho do algoritmo em matrizes grandes
+   -Justificativa: análise de prefências do animal em um ambiente com o mesmo tipo de terreno(1)
    
-   -Configuração: vento=1, iteracao=3
+   -Configuração: vento=0, iteracao=30
    ```cpp
       //input.dat
-      
+      7 7 2 1
+      1 1 1 1 1 1 1
+      1 1 1 1 1 1 1
+      1 1 1 1 1 1 1
+      1 1 1 0 1 1 1
+      1 1 1 1 1 1 1
+      1 1 1 1 1 1 1
+      1 1 1 1 1 1 2
        
       ```
         
-      ```cpp
+   ```cpp
       //output.dat
-     
+      Iteração número 1:
+      1 1 1 1 1 1 1 
+      1 1 1 1 1 1 1 
+      1 1 1 1 1 1 1 
+      1 1 1 0 1 1 1 
+      1 1 1 1 1 1 1 
+      1 1 1 1 1 1 2 
+      1 1 1 1 1 2 2 
+      Passos: 1
+      Encontrou agua: 0
+
+      Iteração número 2:
+      1 1 1 1 1 1 1 
+      1 1 1 1 1 1 1 
+      1 1 1 1 1 1 1 
+      1 1 1 0 1 1 1 
+      1 1 1 1 1 1 2 
+      1 1 1 1 1 2 2 
+      1 1 1 1 2 2 3 
+      Passos: 2
+      Encontrou agua: 0
+
+      Iteração número 3:
+      1 1 1 1 1 1 1 
+      1 1 1 1 1 1 1 
+      1 1 1 1 1 1 1 
+      1 1 1 0 1 1 2 
+      1 1 1 1 1 2 2 
+      1 1 1 1 2 2 3 
+      1 1 1 2 2 3 3 
+      Passos: 3
+      Encontrou agua: 0
+
+      Iteração número 4:
+      1 1 1 1 1 1 1 
+      1 1 1 1 1 1 1 
+      1 1 1 1 1 1 2 
+      1 1 1 0 1 2 2 
+      1 1 1 1 2 2 3 
+      1 1 1 2 2 3 3 
+      1 1 2 2 3 3 3 
+      Passos: 4
+      Encontrou agua: 0
+
+      Iteração número 5:
+      1 1 1 1 1 1 1 
+      1 1 1 1 1 1 2 
+      1 1 1 1 1 2 2 
+      1 1 1 0 2 2 3 
+      1 1 1 2 2 3 3 
+      1 1 2 2 3 3 3 
+      1 2 2 3 3 3 3 
+      Passos: 5
+      Encontrou agua: 0
+
+      Iteração número 6:
+      1 1 1 1 1 1 2 
+      1 1 1 1 1 2 2 
+      1 1 1 1 2 2 3 
+      1 1 1 0 2 3 3 
+      1 1 2 2 3 3 3 
+      1 2 2 3 3 3 3 
+      2 2 3 3 3 3 3 
+      Passos: 6
+      Encontrou agua: 0
+
+      Iteração número 7:
+      1 1 1 1 1 2 2 
+      1 1 1 1 2 2 3 
+      1 1 1 2 2 3 3 
+      1 1 2 0 3 3 3 
+      1 2 2 3 3 3 3 
+      2 2 3 3 3 3 3 
+      2 3 3 3 3 3 3 
+      Passos: 7
+      Encontrou agua: 0
+
+      Iteração número 8:
+      1 1 1 1 2 2 3 
+      1 1 1 2 2 3 3 
+      1 1 2 2 3 3 3 
+      1 2 2 0 3 3 3 
+      2 2 3 3 3 3 3 
+      2 3 3 3 3 3 3 
+      3 3 3 3 3 3 3 
+      Passos: 8
+      Encontrou agua: 0
+
+      Iteração número 9:
+      1 1 1 2 2 3 3 
+      1 1 2 2 3 3 3 
+      1 2 2 3 3 3 3 
+      2 2 3 0 3 3 3 
+      2 3 3 3 3 3 3 
+      3 3 3 3 3 3 3 
+      3 3 3 3 3 3 3 
+      Passos: 9
+      Encontrou agua: 0
+
+      Iteração número 10:
+      1 1 2 2 3 3 3 
+      1 2 2 3 3 3 3 
+      2 2 3 3 3 3 3 
+      2 3 3 0 3 3 3 
+      3 3 3 3 3 3 3 
+      3 3 3 3 3 3 3 
+      3 3 3 3 3 3 3 
+      Passos: 10
+      Encontrou agua: 0
+
+      Iteração número 11:
+      1 2 2 3 3 3 3 
+      2 2 3 3 3 3 3 
+      2 3 3 3 3 3 3 
+      3 3 3 0 3 3 3 
+      3 3 3 3 3 3 3 
+      3 3 3 3 3 3 3 
+      3 3 3 3 3 3 3 
+      Animal cercado.
+      Passos: 11
+      Encontrou agua: 0
+      //fim da simulação
       ```
+
+   ```cpp
+      //print
+      1 1 1 1 1 1 1 
+      1 1 1 1 1 1 1 
+      1 1 1 1 1 1 1 
+      1 1 1 5 1 1 1 
+      1 1 1 1 1 1 1 
+      1 1 1 1 1 1 1 
+      1 1 1 1 1 1 2 
+
+      1 1 1 1 1 1 1 
+      1 1 1 1 1 1 1 
+      1 1 1 5 1 1 1 
+      1 1 1 8 1 1 1 
+      1 1 1 1 1 1 1 
+      1 1 1 1 1 1 2 
+      1 1 1 1 1 2 2 
+
+      1 1 1 1 1 1 1 
+      1 1 1 5 1 1 1 
+      1 1 1 8 1 1 1 
+      1 1 1 8 1 1 1 
+      1 1 1 1 1 1 2 
+      1 1 1 1 1 2 2 
+      1 1 1 1 2 2 3 
+
+      1 1 1 5 1 1 1 
+      1 1 1 8 1 1 1 
+      1 1 1 8 1 1 1 
+      1 1 1 8 1 1 2 
+      1 1 1 1 1 2 2 
+      1 1 1 1 2 2 3 
+      1 1 1 2 2 3 3 
+
+      1 1 5 8 1 1 1 
+      1 1 1 8 1 1 1 
+      1 1 1 8 1 1 2 
+      1 1 1 8 1 2 2 
+      1 1 1 1 2 2 3 
+      1 1 1 2 2 3 3 
+      1 1 2 2 3 3 3 
+
+      1 1 8 8 1 1 1 
+      1 1 5 8 1 1 2 
+      1 1 1 8 1 2 2 
+      1 1 1 8 2 2 3 
+      1 1 1 2 2 3 3 
+      1 1 2 2 3 3 3 
+      1 2 2 3 3 3 3 
+
+      1 1 8 8 1 1 2 
+      1 1 8 8 1 2 2 
+      1 1 5 8 2 2 3 
+      1 1 1 8 2 3 3 
+      1 1 2 2 3 3 3 
+      1 2 2 3 3 3 3 
+      2 2 3 3 3 3 3 
+
+      1 1 8 8 1 2 2 
+      1 1 8 8 2 2 3 
+      1 5 8 8 2 3 3 
+      1 1 2 8 3 3 3 
+      1 2 2 3 3 3 3 
+      2 2 3 3 3 3 3 
+      2 3 3 3 3 3 3 
+
+      1 1 8 8 2 2 3 
+      1 5 8 8 2 3 3 
+      1 8 8 8 3 3 3 
+      1 2 2 8 3 3 3 
+      2 2 3 3 3 3 3 
+      2 3 3 3 3 3 3 
+      3 3 3 3 3 3 3 
+
+      1 5 8 8 2 3 3 
+      1 8 8 8 3 3 3 
+      1 8 8 3 3 3 3 
+      2 2 3 8 3 3 3 
+      2 3 3 3 3 3 3 
+      3 3 3 3 3 3 3 
+      3 3 3 3 3 3 3 
+
+      5 8 8 8 3 3 3 
+      1 8 8 3 3 3 3 
+      2 8 3 3 3 3 3 
+      2 3 3 8 3 3 3 
+      3 3 3 3 3 3 3 
+      3 3 3 3 3 3 3 
+      3 3 3 3 3 3 3 
+
+      5 8 8 3 3 3 3 
+      2 8 3 3 3 3 3 
+      2 3 3 3 3 3 3 
+      3 3 3 8 3 3 3 
+      3 3 3 3 3 3 3 
+      3 3 3 3 3 3 3 
+      3 3 3 3 3 3 3 
+      
+      ```
+   **Nota**: Observa-se que o animal priorizou cima -> esquerda -> baixo
 3. **Exemplo 3**  
    -Justificativa: matriz que demonstra a prioridade de escolha segura do animal e a propagação correta do fogo
 
