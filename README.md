@@ -39,7 +39,7 @@ Este projeto simula a fuga de um animal em um cenário de incêndio florestal, u
 - Pausa por 3 iterações ao encontrar água, regenerando o ambiente nas posições ortogonais(recebem 1).  
 - Marca caminhos percorridos (`8`) apenas na matriz destinada ao percurso do animal (matrizRastro).
 
-### **2. Propagação Dinâmica do Fogo**  
+### **2. Propagação do Fogo**  
 - **5 modos de vento** (sem vento, cima, baixo, esquerda, direita).  
 - **Segunda chance**: Se o fogo queimar a posição atual, o animal tenta outra rota.  
 - Árvores queimadas (`3`) não pegam fogo novamente.
@@ -217,7 +217,7 @@ A classe `Animal` controla a movimentação de um agente em uma matriz de ambien
 
 ### **2. Mecânicas Especiais**  
 - **Florescimento**: Ao encontrar água (`4`), transforma TODAS as adjacências em árvores saudáveis(`1`).  
-- **Segunda chance**: Se o fogo atingir células vizinhas, ativa modo de segunda chance, na qual o animal tem mais uma oportunidade de escapar.  
+- **Segunda chance**: Se o fogo atingir células vizinhas, ativa modo de segunda chance, na qual o animal tem mais uma oportunidade de escapar. Na verdade, a segunda chance pausa o alastramento do fogo por 1 round, dando a possibilidade do animal escapar.  
 - **Detecção de cerco**: Verifica se está totalmente bloqueado pelo fogo.  
 
 ---
@@ -446,9 +446,9 @@ animal.Fugir(ambiente, rastro); // Executa um passo
 [Voltar ao sumário](#sumário)
 
 ## **🔥 Visão Geral**  
-Modela o comportamento do fogo considerando:  
+Define o comportamento do fogo considerando:  
 - **5 modos de propagação** (sem vento + 4 direções ortogonais)  
-- **Mecânica de atraso** (delay) para simular velocidade realista
+- **Mecânica de atraso** (delay) para simular uma demora na queima do fogo
 - **Interação com o animal** (sistema de segunda chance)  
 
 ---
@@ -515,7 +515,7 @@ fogo.alteraEstadoArvoreComFogo(matriz, matrizAux, 10, 10);
 ---
 
 ## **💡 Dicas de Uso**  
-- Para simulação realista:  
+- Para simulação:  
   ```cpp
   // Configurar vento antes de cada iteração
   switch(config.getVento()) {
@@ -613,7 +613,7 @@ if (animalAmeacado) {
 - Permite ao animal reagir antes da próxima propagação
 
 ### **Todas as árvores queimaram?**
--O método verificaFogo analisa se ainda há árvores para serem queimadas e retorna boolean(true, false). Na main, é utilizado para interromper o funcionamento do programa caso não existam mais árvores em chamas.
+- O método verificaFogo analisa se ainda há árvores para serem queimadas e retorna boolean(true, false). Na main, é utilizado para interromper o funcionamento do programa caso não existam mais árvores em chamas.
 
 ## **📊 Estruturas de Dados**
 | Nome | Tipo | Função |
